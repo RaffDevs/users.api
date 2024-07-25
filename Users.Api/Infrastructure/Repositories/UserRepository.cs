@@ -14,29 +14,35 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<List<User>> GetAll()
+    public async Task<List<User>> GetAllAsync()
     {
         var users = await _context.Users.ToListAsync();
         return users;
     }
 
-    public Task<User> GetById(int id)
+    public async Task<User?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var user = await _context.Users.FindAsync(id);
+        return user;
     }
 
-    public Task<User> Create(User user)
+    public async Task<User> CreateAsync(User user)
     {
-        throw new NotImplementedException();
+        var result = _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return result.Entity;
     }
 
-    public Task Update(User user)
+    public async Task UpdateAsync(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync();
     }
 
-    public Task Delete(int id)
+    public async Task DeleteAsync(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
     }
+    
 }
