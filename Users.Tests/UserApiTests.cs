@@ -1,8 +1,7 @@
-using System.Configuration;
 using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
-using Models;
+using Users.Api.Core.Entities;
 
 namespace Users.Tests;
 
