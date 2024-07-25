@@ -10,7 +10,7 @@
     networks:
       - users_network
     environment:
-      DB_SERVER: users_db
+      DB_SERVER: users.db
       DB_DATABASE: "users"
       DB_USER: "dev"
       DB_PASSWORD: "senhaXPTO"
