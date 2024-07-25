@@ -1,0 +1,33 @@
+﻿services:
+  users.api:
+    image: users.api
+    container_name: users_api
+    build:
+      context: .
+      dockerfile: Users.Api/Dockerfile
+    ports:
+      - "5002:8080"
+    networks:
+      - users_network
+    environment:
+      DB_SERVER: users_db
+      DB_DATABASE: "users"
+      DB_USER: "dev"
+      DB_PASSWORD: "senhaXPTO"
+      DB_PORT: 5432
+  
+  users.db:
+    image: postgres
+    container_name: "users_db"
+    environment:
+      POSTGRES_DB: "users"
+      POSTGRES_USER: "dev"
+      POSTGRES_PASSWORD: "senhaXPTO"
+    ports:
+      - "5001:5432"
+    networks:
+      - users_network
+
+networks:
+  users_network:
+    driver: bridge
