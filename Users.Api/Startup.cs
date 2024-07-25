@@ -21,7 +21,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         string? server = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost";
-        string? port = Environment.GetEnvironmentVariable("DB_PORT") ?? "5001";
+        string? port = Environment.GetEnvironmentVariable("DB_PORT") ?? "5202";
         string? database = Environment.GetEnvironmentVariable("DB_DATABASE") ?? "users";
         string? user = Environment.GetEnvironmentVariable("DB_USER") ?? "dev";
         string? password = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "senhaXPTO";
