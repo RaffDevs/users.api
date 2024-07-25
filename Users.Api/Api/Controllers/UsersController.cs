@@ -35,7 +35,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> GetById(int id)
     {
         var query = new GetUserByIdQuery(id);
         var user = await _mediator.Send(query);
@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
     {
         var command = new CreateUserCommand(data);
         var user = await _mediator.Send(command);
-        return Ok(user);
+        return CreatedAtAction(nameof(GetById), new { id = user.Id }, user);
     }
 
     [HttpPut("{id}")]
