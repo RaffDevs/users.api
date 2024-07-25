@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Users.Api.Application.Commands.CreateUser;
+using Users.Api.Application.Commands.UpdateUser;
 using Users.Api.Core.Entities;
 
 namespace Users.Api.Api.Controllers;
@@ -43,9 +44,11 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Put(int id)
+    public async Task<IActionResult> Put(int id, [FromBody] User data)
     {
-        return NoContent();
+        var command = new UpdateUserCommand(id, data);
+        await _mediator.Send(command);
+        return Ok();
     }
 
     [HttpDelete("{id}")]
