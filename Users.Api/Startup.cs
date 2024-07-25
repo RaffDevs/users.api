@@ -59,8 +59,7 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         // Configure the HTTP request pipeline.
-        //TODO(remove !)
-        if (!env.IsDevelopment())
+        if (env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
