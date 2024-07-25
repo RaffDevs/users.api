@@ -4,6 +4,7 @@ using Users.Api.Application.Commands.CreateUser;
 using Users.Api.Application.Commands.DeleteUser;
 using Users.Api.Application.Commands.UpdateUser;
 using Users.Api.Application.Queries.GetAllUsers;
+using Users.Api.Application.Queries.GetUserById;
 using Users.Api.Core.Entities;
 
 namespace Users.Api.Api.Controllers;
@@ -34,9 +35,11 @@ public class UsersController : ControllerBase
     }
     
     [HttpGet("{id}")]
-    public IActionResult Get(int id)
+    public async Task<IActionResult> Get(int id)
     {
-        return Ok(id);
+        var query = new GetUserByIdQuery(id);
+        var user = await _mediator.Send(query);
+        return Ok(user);
     }
 
     [HttpPost]
