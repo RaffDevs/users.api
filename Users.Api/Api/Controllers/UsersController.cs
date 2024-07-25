@@ -1,16 +1,19 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Users.Api.Core.Repositories;
+using Users.Api.Application.Commands.CreateUser;
+using Users.Api.Core.Entities;
 
-namespace Users.Api.Controllers;
+namespace Users.Api.Api.Controllers;
 
 [Route("api/Users")]
 public class UsersController : ControllerBase
 {
-    private readonly IUserRepository _repository;
 
-    public UsersController(IUserRepository repository)
+    private readonly IMediator _mediator;
+
+    public UsersController(IMediator mediator)
     {
-        _repository = repository;
+        _mediator = mediator;
     }
 
     [HttpGet("hello")]
@@ -22,8 +25,7 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var users = await _repository.GetAll();
-        return Ok(users);
+        return Ok();
     }
     
     [HttpGet("{id}")]
@@ -33,9 +35,11 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post()
+    public async Task<IActionResult> Post([FromBody] User data)
     {
-        return Ok();
+        var command = new CreateUserCommand(data);
+        var user = await _mediator.Send(command);
+        return Ok(user);
     }
 
     [HttpPut("{id}")]
