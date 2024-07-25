@@ -1,7 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Users.Api.Application.Commands.CreateUser;
+using Users.Api.Application.Commands.DeleteUser;
 using Users.Api.Application.Commands.UpdateUser;
+using Users.Api.Application.Queries.GetAllUsers;
 using Users.Api.Core.Entities;
 
 namespace Users.Api.Api.Controllers;
@@ -26,7 +28,9 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        return Ok();
+        var query = new GetAllUsersQuery();
+        var users = await _mediator.Send(query);
+        return Ok(users);
     }
     
     [HttpGet("{id}")]
@@ -52,8 +56,10 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        return NoContent();
+        var command = new DeleteUserCommand(id);
+        await _mediator.Send(command);
+        return Ok();
     }
 }
