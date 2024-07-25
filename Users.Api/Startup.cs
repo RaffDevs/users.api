@@ -3,6 +3,10 @@ using Users.Api.Application.Commands.CreateUser;
 using Users.Api.Core.Repositories;
 using Users.Api.Infrastructure.Context;
 using Users.Api.Infrastructure.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Users.Api.Api.Filters;
+using Users.Api.Application.Validators;
 
 namespace Users.Api;
 
@@ -37,8 +41,14 @@ public class Startup
         services.AddMediatR(
             config => config.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly)
         );
-        
-        services.AddControllers();
+        services.AddFluentValidationAutoValidation();
+        services.AddFluentValidationClientsideAdapters();
+        services.AddValidatorsFromAssembly(typeof(CreateUserValidator).Assembly);
+        services.AddControllers(options =>
+        {
+            options.Filters.Add(typeof(ValidationFilter));
+            options.Filters.Add(typeof(ApiExceptionFilter));
+        });
         
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
@@ -49,7 +59,8 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         // Configure the HTTP request pipeline.
-        if (env.IsDevelopment())
+        //TODO(remove !)
+        if (!env.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();

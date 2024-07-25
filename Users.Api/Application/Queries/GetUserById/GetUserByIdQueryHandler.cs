@@ -1,4 +1,5 @@
 using MediatR;
+using Users.Api.Application.Exceptions;
 using Users.Api.Core.Entities;
 using Users.Api.Core.Repositories;
 
@@ -19,7 +20,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
 
         if (user is null)
         {
-            throw new NotImplementedException();
+            throw new NotFoundException("No users found for this Id!");
         }
 
         return user;

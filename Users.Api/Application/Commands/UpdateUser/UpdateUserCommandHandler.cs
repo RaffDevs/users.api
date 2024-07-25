@@ -1,4 +1,5 @@
 using MediatR;
+using Users.Api.Application.Exceptions;
 using Users.Api.Core.Repositories;
 
 namespace Users.Api.Application.Commands.UpdateUser;
@@ -18,7 +19,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 
         if (user is null)
         {
-            throw new NotImplementedException();
+            throw new NotFoundException("No users found for this Id!");
         }
 
         user.Name = request.Model.Name;
