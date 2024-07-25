@@ -48,9 +48,7 @@ A API, embora simples, está implementada usando princípios do Clean Architectu
 5. **Ainda nessa pasta, execute a aplicação da migration**:
 
    ```sh
-    dotnet ef database update --connection       
-   "Host=localhost;Port=5202;Pooling=true;Database=users;User 
-    Id=dev;Password=senhaXPTO;"
+    dotnet ef database update --connection "Host=localhost;Port=5202;Pooling=true;Database=users;User Id=dev;Password=senhaXPTO;"
    ```
    **Observação: Este comando está usando a string de conexão com os parâmetros padrões. Caso queira alterar, não se esqueça de alterar no docker-compose e também no arquivo Startup**.
    
