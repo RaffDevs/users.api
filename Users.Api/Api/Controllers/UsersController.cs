@@ -1,10 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
+using Users.Api.Core.Repositories;
 
 namespace Users.Api.Controllers;
 
 [Route("api/Users")]
 public class UsersController : ControllerBase
 {
+    private readonly IUserRepository _repository;
+
+    public UsersController(IUserRepository repository)
+    {
+        _repository = repository;
+    }
+
     [HttpGet("hello")]
     public IActionResult HelloWorld()
     {
@@ -12,9 +20,10 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get()
+    public async Task<IActionResult> Get()
     {
-        return Ok();
+        var users = await _repository.GetAll();
+        return Ok(users);
     }
     
     [HttpGet("{id}")]

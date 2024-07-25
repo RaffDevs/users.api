@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Users.Api.Core.Repositories;
 using Users.Api.Infrastructure.Context;
+using Users.Api.Infrastructure.Repositories;
 
 namespace Users.Api;
 
@@ -30,6 +32,7 @@ public class Startup
         {
             options.UseNpgsql(connectionString);
         });
+        services.AddScoped<IUserRepository, UserRepository>();
         
         services.AddControllers();
         

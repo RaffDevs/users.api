@@ -1,13 +1,23 @@
+using Microsoft.EntityFrameworkCore;
 using Users.Api.Core.Entities;
 using Users.Api.Core.Repositories;
+using Users.Api.Infrastructure.Context;
 
 namespace Users.Api.Infrastructure.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    public Task<User> GetAll()
+    private readonly UsersDatabaseContext _context;
+
+    public UserRepository(UsersDatabaseContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+
+    public async Task<List<User>> GetAll()
+    {
+        var users = await _context.Users.ToListAsync();
+        return users;
     }
 
     public Task<User> GetById(int id)
