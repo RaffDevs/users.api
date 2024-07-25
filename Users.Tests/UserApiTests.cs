@@ -31,7 +31,7 @@ public class UserApiTests
         stringResponse.Should().Be("Hello World!");
     }
     
-    [Test, Order(2)]
+    [Test, Order(3)]
     public async Task GetUsers()
     {
         // Arrange
@@ -50,7 +50,7 @@ public class UserApiTests
             Assert.GreaterOrEqual(users.Length, 1);
     }
     
-    [Test, Order(3)]
+    [Test, Order(2)]
     public async Task InsertUser()
     {
         var random = new Random();
