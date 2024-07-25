@@ -16,7 +16,7 @@ Os candidatos devem seguir os seguintes passos para concluir esta etapa:
 ## Resolução
 
 ### Descrição do teste técnico
-Este teste técnico visa avaliar a capacidade do candidato em desenvolver uma API seguindo especificações definidas.
+Implementação de uma API de usuarios seguido por testes unitários para validação da api.
 
 ### Estrutura do projeto
 A API, embora simples, está implementada usando princípios do Clean Architecture e CQRS (Command Query Responsibility Segregation). Isso garante uma separação clara de responsabilidades e facilita a manutenção e evolução do projeto.
