@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Application.Commands.CreateUser;
 using Users.Api.Core.Repositories;
@@ -5,6 +6,11 @@ using Users.Api.Infrastructure.Context;
 using Users.Api.Infrastructure.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Users.Api.Api.Filters;
 using Users.Api.Application.Validators;
 

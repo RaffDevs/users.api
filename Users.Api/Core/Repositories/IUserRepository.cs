@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Users.Api.Core.Entities;
 
 namespace Users.Api.Core.Repositories;

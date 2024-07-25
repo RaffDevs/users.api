@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MediatR;
 using Users.Api.Core.Entities;
 

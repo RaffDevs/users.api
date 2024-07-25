@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Core.Entities;
 using Users.Api.Core.Repositories;

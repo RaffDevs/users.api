@@ -1,3 +1,5 @@
+using System;
+
 namespace Users.Api.Application.Exceptions;
 
 public class InternalServerException : Exception
